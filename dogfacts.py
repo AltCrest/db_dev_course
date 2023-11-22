@@ -1,4 +1,4 @@
-# import pandas as pd
+import pandas as pd
 import requests
 import json
 
@@ -20,7 +20,19 @@ def get_cat_facts(_amount):
 
     # print(response['status']) # Access the values
     # print(response['text'])
-    for fact in l_cat_fact:
-        return print(fact)
+    df = pd.DataFrame(l_cat_fact, columns=['Text'])
+    df['new_col'] = "cat fact"
+
+    cat_fact_df = df[df['new_col'] == 'cat fact']
+    df = df[df['new_col'] == 'cat fact']
+
+    # print(df.head())
+    # df = df.loc[2, :]
     
-str_cat_facts = get_cat_facts(3)
+    # one_value = df.iloc[2, 0]
+    # one_row = df.iloc[0, :]
+    return df
+    
+str_cat_facts = get_cat_facts(5)
+for fact in str_cat_facts:
+    print(fact + "\n")
